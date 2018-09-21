@@ -10,6 +10,9 @@
 {{#if this.note}}
 <button type="button" class="addnote-button" value="{{this._id}}">Edit Note</button>
 {{/if}}
+{{#if this.save}}
+<button type="button" class="save" value="{{this._id}}">save</button>
+{{/if}}
 </form>
 </h2>
 <summary>{{this.summary}}</summary>
