@@ -55,11 +55,11 @@ $(document).on("click", "#save", function() {
     url: "/articles/" + thisId,
     data: {
       // Value taken from title input
-      title: $("#titleinput").val(),
+      title: (require.body.title).val(),
       // Value taken from note textarea
-      body: $("#bodyinput").val(),
-      summary: $("#summaryinput").val(),
-      img: $("img").val()
+      body: (require.body.body).val(),
+      summary: (require.body.summary).val(),
+      img: (require.body.img).val()
     }
   })
     // With that done

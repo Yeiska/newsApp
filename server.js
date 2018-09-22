@@ -97,10 +97,10 @@ app.get("/scrape", function(req, res) {
 	});
 });
 
-app.get("/saved", function(req, res) {
+app.get("/save", function(req, res) {
 	Article.find({issaved: true}, null, {sort: {created: -1}}, function(err, data) {
 		if(data.length === 0) {
-			res.render("placeholder", {message: "You have not saved any articles yet. Try to save some delicious news by simply clicking \"Save Article\"!"});
+			res.render("placeholder", {message: "You have not saved any articles yet. Try to save some news by simply clicking \"Save Article\"!"});
 		}
 		else {
 			res.render("saved", {saved: data});
@@ -143,7 +143,10 @@ app.post("/save/:id", function(req, res) {
 });
 
 app.post("/note/:id", function(req, res) {
-	var note = new Note(req.body);
+	var note = new Note({
+		body:req.body.text,
+		Article: req.params.id
+	});
 	note.save(function(err, doc) {
 		if (err) throw err;
 		Article.findByIdAndUpdate(req.params.id, {$set: {"note": doc._id}}, {new: true}, function(err, newdoc) {
